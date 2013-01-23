@@ -392,7 +392,9 @@ public class Ringer {
                             r = mRingtone;
                             if (r != null && !hasMessages(STOP_RING) && !r.isPlaying()) {
                                 PhoneUtils.setAudioMode();
-                                r.play();
+                                while (r != null && !hasMessages(STOP_RING)) {
+                                    r.play();
+                                }
                                 synchronized (Ringer.this) {
                                     if (mFirstRingStartTime < 0) {
                                         mFirstRingStartTime = SystemClock.elapsedRealtime();
